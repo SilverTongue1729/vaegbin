@@ -154,27 +154,13 @@ class ResultTable:
 
     def add_row(self, model_name, S):
         df = pd.DataFrame(S)
-        
-        # Handle NaNs before calculations
-        df.fillna(0, inplace=True)  # Replace NaNs with 0 (you can adapt this)
-
         mean = df.mean()
         std = df.std()
-        r = [model_name]
-
-        # Iterate over columns with conditional formatting
-        for c in df.columns:
-            if c in df.columns[:-3]:  # Check if column requires '.2f' formatting
-                if np.isnan(mean[c]) or np.isnan(std[c]):
-                    r.append("N/A")
-                else:
-                    r.append(f"{mean[c]:.2f}±{std[c]:.2f}") 
-            else:  # Columns requiring 'd' integer formatting
-                if np.isnan(mean[c]) or np.isnan(std[c]):
-                    r.append("N/A")
-                else:
-                    r.append(f"{int(mean[c]):d}±{int(std[c]):d}") 
-
+        r = (
+            [model_name]
+            + [f"{mean[c]:.2f}±{std[c]:.2f}" for c in df.columns[:-3]]
+            + [f"{int(mean[c]):d}±{int(std[c]):d}" for c in df.columns[-3:]]
+        )
         print(r)
         self.table.add_row(*r, end_section=True)
         self.rows.append(",".join(r))
@@ -263,7 +249,7 @@ def plot_clusters(node_features, vae_features, node_labels, model_name):
 
 
 if __name__ == "__main__":
-    n_runs = 1
+    n_runs = 2
     print(f"Running {n_runs} times")
     dataset = sys.argv[1]
     reference_markers = load_reference_markers("data/Bacteria.ms")
