@@ -250,6 +250,7 @@ def plot_clusters(node_features, vae_features, node_labels, model_name):
 
 if __name__ == "__main__":
     n_runs = 1
+    print(f"Running {n_runs} times")
     dataset = sys.argv[1]
     reference_markers = load_reference_markers("data/Bacteria.ms")
     contig_genes = load_contig_genes("data/{}/marker_gene_stats.tsv".format(dataset))
@@ -308,10 +309,14 @@ if __name__ == "__main__":
 
     adj_norm = normalize_adj_sparse(adjacency_matrix_sparse)
 
+    print(f"Running on {dataset} with {node_features.shape[0]} nodes and {node_features.shape[1]} features")
     hidden_units = 128
     output_dim = 64
+    print(f"Hidden units: {hidden_units}, output dim: {output_dim}")
     epochs = 500
+    print(f"Epochs: {epochs}")
     lr = 1e-3 # 1e-2 
+    print(f"Learning rate: {lr}")
     nlayers = 2
     VAE = False
     clustering = "vamb"
