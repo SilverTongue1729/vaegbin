@@ -249,7 +249,7 @@ def plot_clusters(node_features, vae_features, node_labels, model_name):
 
 
 if __name__ == "__main__":
-    n_runs = 10
+    n_runs = 1
     dataset = sys.argv[1]
     reference_markers = load_reference_markers("data/Bacteria.ms")
     contig_genes = load_contig_genes("data/{}/marker_gene_stats.tsv".format(dataset))
@@ -311,7 +311,7 @@ if __name__ == "__main__":
     hidden_units = 128
     output_dim = 64
     epochs = 500
-    lr = 1e-2
+    lr = 1e-3 # 1e-2 
     nlayers = 2
     VAE = False
     clustering = "vamb"
