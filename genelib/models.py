@@ -176,7 +176,7 @@ class TH:
 
 class GCN(Model):
     def __init__(self, features, labels, adj, n_labels=None, \
-                 hidden_units=None, layers=None, conv_last=None, use_bn=True, use_vae=False):
+                 hidden_units=None, layers=None, conv_last=None, use_bn=True, use_vae=True):
         super(GCN, self).__init__()
         assert layers > 0
         self.features = features
