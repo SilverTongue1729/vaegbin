@@ -329,7 +329,7 @@ if __name__ == "__main__":
     print(f"Hidden units: {hidden_units}, output dim: {output_dim}")
     epochs = 500
     print(f"Epochs: {epochs}")
-    lr = 5e-3 # 1e-2 
+    lr = 1e-2 
     print(f"Learning rate: {lr}")
     nlayers = 2
     VAE = False
